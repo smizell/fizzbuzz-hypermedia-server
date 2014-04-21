@@ -1,0 +1,20 @@
+{
+  "name": "fizzbuzz-hypermedia-server",
+  "version": "0.0.0",
+  "description": "FizzBuzz Hypermedia Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "FizzBuzz",
+    "Hypermedia"
+  ],
+  "author": "Stephen Mizell",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.0.0",
+    "bizzfuzz": "~1.0.3",
+    "underscore": "~1.6.0"
+  }
+}
