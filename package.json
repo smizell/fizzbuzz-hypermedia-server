@@ -1,10 +1,14 @@
 {
   "name": "fizzbuzz-hypermedia-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "FizzBuzz Hypermedia Server",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smizell/fizzbuzz-hypermedia-server"
   },
   "keywords": [
     "FizzBuzz",
@@ -16,5 +20,9 @@
     "express": "~4.0.0",
     "bizzfuzz": "~1.0.3",
     "underscore": "~1.6.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/smizell/fizzbuzz-hypermedia-server/issues"
+  },
+  "homepage": "https://github.com/smizell/fizzbuzz-hypermedia-server"
 }
