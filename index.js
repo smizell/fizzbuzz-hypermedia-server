@@ -47,7 +47,8 @@ var startFizzBuzzAction = function() {
       { name: "startsAt", type: "number", value: "1" },
       { name: "endsAt", type: "number", value: "100" },
       { name: "firstNumber", type: "number", value: "3" },
-      { name: "secondNumber", type: "number", value: "5" }
+      { name: "secondNumber", type: "number", value: "5" },
+      { name: "embed", type: "number" }
     ]
   }
 }
@@ -68,6 +69,24 @@ var getValueAction = function() {
 var buildUrl = function(number, qs) {
   var newQueryString = _.extend({}, qs, { number: number });
   return [routes.fizzbuzz, "?", querystring.stringify(newQueryString)].join("");
+}
+
+var embed = function(bizzFuzz, number) {
+  var rep = {
+    rel: ["next"],
+    properties: {
+      number: number,
+      value: bizzFuzz.valueFor(number)
+    }
+  };
+
+  if (bizzFuzz.isNextAfter(number)) {
+    var nextNumber = bizzFuzz.nextAfter(number);
+    rep.entities = [];
+    rep.entities.push(embed(bizzFuzz, nextNumber));
+  }
+
+  return rep;
 }
 
 app.get(routes.home, function(req, res){
@@ -96,8 +115,13 @@ app.get(routes.fizzbuzz, function(req, res) {
 
     if (bizzFuzz.isNextAfter(rep.properties.number)) {
       var nextNumber = bizzFuzz.nextAfter(rep.properties.number)
-      var link = { rel: ["next"], href: buildUrl(nextNumber, req.query) }
-      rep.links.push(link);
+
+      if ("embed" in req.query) {
+        rep.entities = [embed(bizzFuzz, nextNumber)]
+      } else {
+        var link = { rel: ["next"], href: buildUrl(nextNumber, req.query) }
+        rep.links.push(link);
+      }
     }
   }
 
